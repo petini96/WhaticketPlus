@@ -42,10 +42,10 @@ system_set_timezone
 system_set_ufw
 system_node_install
 system_pm2_install
-# system_docker_install
+#system_docker_install
 system_puppeteer_dependencies
 system_snapd_install
-# system_nginx_install
+system_nginx_install
 system_certbot_install
 
 # system config
@@ -54,7 +54,7 @@ system_execute_comand
 
 # backend related
 system_unzip_whaticket
-# backend_chrome_install
+backend_chrome_install
 backend_set_env
 backend_redis_create
 backend_node_dependencies

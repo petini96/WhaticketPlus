@@ -84,7 +84,7 @@ system_node_install() {
   wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
   sudo apt-get update -y && sudo apt-get -y install postgresql
   sleep 2
-  sudo timedatectl set-timezone America/Campo_Grande
+  sudo timedatectl set-timezone America/Sao_Paulo
   sleep 2
   sudo -u postgres psql -c "ALTER USER postgres PASSWORD '2000@23';"
   sudo -u postgres psql -c "CREATE DATABASE whaticketwhaticketpus;"
@@ -99,65 +99,65 @@ EOF
 # Arguments:
 #   None
 #######################################
-# system_docker_install() {
-#   print_banner
-#   printf "${WHITE} 💻 Instalando docker...${GRAY_LIGHT}"
-#   printf "\n\n"
+system_docker_install() {
+  print_banner
+  printf "${WHITE} 💻 Instalando docker...${GRAY_LIGHT}"
+  printf "\n\n"
 
-#   sleep 2
+  sleep 2
 
-#   # Verifica se o sistema é Ubuntu
-#   if [ -f /etc/os-release ]; then
-#     source /etc/os-release
-#     if [ "$ID" = "ubuntu" ]; then
-#       ubuntu_docker_install
-#     elif [ "$ID" = "debian" ]; then
-#       debian_docker_install
-#     else
-#       printf "${RED} ❌ Sistema operacional não suportado.${NC}"
-#     fi
-#   else
-#     printf "${RED} ❌ Não é possível determinar o sistema operacional.${NC}"
-#   fi
-# }
+  # Verifica se o sistema é Ubuntu
+  if [ -f /etc/os-release ]; then
+    source /etc/os-release
+    if [ "$ID" = "ubuntu" ]; then
+      ubuntu_docker_install
+    elif [ "$ID" = "debian" ]; then
+      debian_docker_install
+    else
+      printf "${RED} ❌ Sistema operacional não suportado.${NC}"
+    fi
+  else
+    printf "${RED} ❌ Não é possível determinar o sistema operacional.${NC}"
+  fi
+}
 
-# ubuntu_docker_install() {
-#   sudo su - root <<EOF
-#   apt update
-#   apt install -y apt-transport-https \
-#                  ca-certificates curl \
-#                  software-properties-common
+ubuntu_docker_install() {
+  sudo su - root <<EOF
+  apt update
+  apt install -y apt-transport-https \
+                 ca-certificates curl \
+                 software-properties-common
 
-#   curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
+  curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
   
-#   add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable"
+  add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable"
 
-#   apt update
-#   apt install -y docker-ce
-# EOF
+  apt update
+  apt install -y docker-ce
+EOF
 
-#   sleep 2
-# }
+  sleep 2
+}
 
-# debian_docker_install() {
-#   sudo su - root <<EOF
-#   apt update
-#   apt install -y apt-transport-https \
-#                  ca-certificates curl \
-#                  gnupg lsb-release
+debian_docker_install() {
+  sudo su - root <<EOF
+  apt update
+  apt install -y apt-transport-https \
+                 ca-certificates curl \
+                 gnupg lsb-release
 
-#   curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+  curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
   
-#   echo \
-#     "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian \
-#     \$(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null
+  echo \
+    "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian \
+    \$(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null
 
-#   apt update
-#   apt install -y docker-ce docker-ce-cli containerd.io
-# EOF
+  apt update
+  apt install -y docker-ce docker-ce-cli containerd.io
+EOF
 
-#   sleep 2
-# }
+  sleep 2
+}
 #######################################
 # Ask for file location containing
 # multiple URL for streaming.
@@ -281,7 +281,7 @@ system_set_timezone() {
   sleep 2
 
   sudo su - root <<EOF
-  timedatectl set-timezone America/Campo_Grande
+  timedatectl set-timezone America/Sao_Paulo
 EOF
 
   sleep 2
@@ -354,21 +354,21 @@ EOF
 # Arguments:
 #   None
 #######################################
-# system_nginx_install() {
-#   print_banner
-#   printf "${WHITE} 💻 Instalando nginx...${GRAY_LIGHT}"
-#   printf "\n\n"
+system_nginx_install() {
+  print_banner
+  printf "${WHITE} 💻 Instalando nginx...${GRAY_LIGHT}"
+  printf "\n\n"
 
-#   sleep 2
+  sleep 2
 
-#   sudo su - root <<EOF
-#   apt install -y nginx
-#   rm /etc/nginx/sites-enabled/default
-#   sudo apt update
-# EOF
+  sudo su - root <<EOF
+  apt install -y nginx
+  rm /etc/nginx/sites-enabled/default
+  sudo apt update
+EOF
 
-#   sleep 2
-# }
+  sleep 2
+}
 
 #######################################
 # restarts nginx
