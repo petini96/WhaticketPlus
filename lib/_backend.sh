@@ -118,22 +118,22 @@ EOF
 # Arguments:
 #   None
 #######################################
-backend_chrome_install() {
-  print_banner
-  printf "${WHITE} 💻 Vamos instalar o Chrome...${GRAY_LIGHT}"
-  printf "\n\n"
+# backend_chrome_install() {
+#   print_banner
+#   printf "${WHITE} 💻 Vamos instalar o Chrome...${GRAY_LIGHT}"
+#   printf "\n\n"
 
-  sleep 2
+#   sleep 2
 
-  sudo su - root <<EOF
-  sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
-  wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-  apt-get update
-  apt-get install -y google-chrome-stable
-EOF
+#   sudo su - root <<EOF
+#   sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
+#   wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+#   apt-get update
+#   apt-get install -y google-chrome-stable
+# EOF
 
-  sleep 2
-}
+#   sleep 2
+# }
 
 #######################################
 # installs node.js dependencies
